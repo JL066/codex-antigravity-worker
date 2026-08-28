@@ -71,7 +71,7 @@ When a follow-up task builds upon previous worker context:
 
 ## Safety & Isolation Guidelines
 
-1. **Workspace Boundary**: Always provide an explicit, dedicated `cwd`. Never delegate with root (`/`), home directories (`~`), or system directories as `cwd`.
+1. **Workspace Boundary**: Always provide an explicit, dedicated `cwd` (note: `cwd` specifies the working directory and is not an OS sandbox). Never delegate with root (`/`), home directories (`~`), or system directories as `cwd`.
 2. **Git Worktree Isolation (Recommended for High-Risk Changes)**:
    For high-risk, broad, or speculative code modifications:
    - Primary agent creates an isolated Git worktree: `git worktree add ../feature-worktree -b feature-branch`.

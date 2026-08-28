@@ -51,7 +51,7 @@ echo "      Installed skill to: ${SKILLS_DEST}/SKILL.md"
 echo "[4/4] Checking Codex MCP configuration (${CODEX_HOME}/config.toml)..."
 CONFIG_FILE="${CODEX_HOME}/config.toml"
 
-if [[ -f "${CONFIG_FILE}" ]] && grep -q '\[mcp_servers\.agy\]' "${CONFIG_FILE}"; then
+if [[ -f "${CONFIG_FILE}" ]] && grep -Fq '[mcp_servers.agy]' "${CONFIG_FILE}"; then
     echo "      'agy' MCP server is already registered in ${CONFIG_FILE}."
 else
     echo "      'agy' MCP server is NOT yet registered in ${CONFIG_FILE}."

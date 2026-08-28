@@ -61,9 +61,28 @@ fi
 
 if [[ -n "${CODEX_BIN}" ]]; then
     echo "Found Codex CLI at: ${CODEX_BIN}"
+
+    EXTRA_FLAGS=()
+    if [[ "${CODEX_UNSAFE_SMOKE:-0}" == "1" ]]; then
+        echo "Notice: CODEX_UNSAFE_SMOKE=1 enabled; running with bypassed approvals and sandbox."
+        EXTRA_FLAGS+=("--dangerously-bypass-approvals-and-sandbox")
+    else
+        echo "Running smoke test with standard Codex approvals and sandbox policy."
+        echo "Note: If your environment requires unattended execution without interactive prompts,"
+        echo "      you can explicitly opt in using: CODEX_UNSAFE_SMOKE=1 ./scripts/smoke-test.sh"
+    fi
+
     echo "Running end-to-end task through Codex..."
-    "${CODEX_BIN}" exec --dangerously-bypass-approvals-and-sandbox -C "${TMP_DIR}" \
-        "请调用 agy MCP 工具中的 agy_run_sync，指定 model 为 gemini-3.7-flash-high，在当前目录修复 calculator.py 的折扣计算 bug 并运行现有测试验证。" </dev/null
+    "${CODEX_BIN}" exec "${EXTRA_FLAGS[@]}" -C "${TMP_DIR}" \
+        "请调用 agy MCP 工具中的 agy_run_sync，指定 model 为 gemini-3.7-flash-high，在当前目录修复 calculator.py 的折扣计算 bug 并运行现有测试验证。" </dev/null || {
+            echo ""
+            echo "Smoke test execution finished with non-zero exit code."
+            if [[ "${CODEX_UNSAFE_SMOKE:-0}" != "1" ]]; then
+                echo "Tip: If execution was blocked by approval/sandbox prompts in non-interactive mode,"
+                echo "     try: CODEX_UNSAFE_SMOKE=1 ./scripts/smoke-test.sh"
+            fi
+            exit 1
+        }
 else
     echo "Codex CLI not detected in standard locations. Please run the task from within the Codex UI."
 fi

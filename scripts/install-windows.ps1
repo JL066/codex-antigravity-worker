@@ -49,7 +49,7 @@ Write-Host "      Installed skill to: $SkillTarget" -ForegroundColor Green
 
 # 4. Check Codex Configuration
 Write-Host "[4/4] Checking Codex MCP configuration ($ConfigFile)..." -ForegroundColor Yellow
-if ((Test-Path $ConfigFile) -and (Select-String -Path $ConfigFile -Pattern "\[mcp_servers\.agy\]" -Quiet)) {
+if ((Test-Path $ConfigFile) -and (Select-String -Path $ConfigFile -SimpleMatch "[mcp_servers.agy]" -Quiet)) {
     Write-Host "      'agy' MCP server is already registered in $ConfigFile." -ForegroundColor Green
 } else {
     Write-Host "      'agy' MCP server is NOT yet registered in $ConfigFile." -ForegroundColor Yellow

@@ -130,10 +130,11 @@ This repository installs the [`antigravity-flash-worker`](skills/antigravity-fla
 - **Error & Log Triage**: Pinpointing root-cause files and lines from stack traces.
 - **Targeted Bug Fixes & Unit Tests**: Fixing localized bugs and writing verifying unit tests.
 
-### Delegation Boundary & Safety
-- **Primary Agent Authority**: Codex reviews diffs, runs test suites, and makes all architectural decisions.
-- **Unattended Execution**: Runs with `--dangerously-skip-permissions` inside the assigned `cwd` for autonomous execution.
+### Delegation Boundary & Operational Safeguards
+- **Unattended Execution**: `agy-mcp` launches `agy` with `--dangerously-skip-permissions` for autonomous execution. Note that `cwd` specifies the intended working directory, **not** an OS security sandbox.
+- **Caller-Side Safeguards**: Always pass explicit project paths; avoid delegating with root (`/`) or home (`~`) directories.
 - **High-Risk Worktree Pattern**: For broad or speculative changes, Codex can create an isolated Git worktree (`git worktree add ../temp-worktree`) and delegate execution there before merging.
+- **Primary Agent Authority**: Codex reviews diffs, runs test suites independently, and makes all architectural decisions.
 
 ---
 

@@ -59,22 +59,31 @@
 
 ---
 
-## Safety & Isolation Architecture
+## Safety & Operational Safeguards
 
-### Unattended Execution Boundary
-To enable autonomous sub-agent execution without interactive terminal approval prompts, `agy-mcp` launches `agy` with `--dangerously-skip-permissions`. To safeguard system integrity, the following boundaries are enforced:
+### Unattended Execution & Trust Model
+To enable autonomous sub-agent execution without interactive approval prompts, `agy-mcp` launches `agy` with `--dangerously-skip-permissions`.
 
-1. **Scoped Working Directory (`cwd`)**:
-   - Every delegation requires an explicit, restricted directory path.
-   - Never use root (`/`), home (`~`), or system configuration paths as `cwd`.
+> [!IMPORTANT]
+> **Working Directory (`cwd`) is NOT a Security Sandbox**:
+> The `cwd` parameter specifies the target working directory for the agent's tasks, but it is **not** an OS-level or containerized security sandbox. Neither `cwd` nor MCP tool annotations prevent the sub-agent from accessing files outside the workspace if prompted or required by tooling.
+>
+> All isolation and safety guarantees rely on **caller-side operational safeguards**.
 
-2. **Git Worktree Isolation Pattern**:
-   - For high-entropy or speculative tasks, Codex creates an ephemeral Git worktree:
+### Recommended Caller-Side Safeguards
+
+1. **Mindful Directory Selection**:
+   - Always supply an explicit project directory or fixture path.
+   - Never use root (`/`), user home (`~`), or system configuration paths as `cwd`.
+
+2. **Git Worktree Isolation Pattern (High-Risk / Speculative Tasks)**:
+   - When delegating tasks with broad impact or uncertain scope, the primary agent (Codex) should create an ephemeral Git worktree:
      ```bash
      git worktree add ../isolated-worker-task -b worker-task-branch
      ```
-   - Codex delegates to `agy-mcp` with `cwd = "../isolated-worker-task"`.
-   - After verification, Codex merges or discards the worktree cleanly.
+   - Pass the worktree path (`../isolated-worker-task`) as `cwd` to `agy-mcp`.
+   - Codex reviews the diff in the worktree before merging into the main working tree.
 
 3. **Mandatory Primary Agent Verification**:
-   - Codex always inspects `git status`, `git diff`, and executes automated tests before declaring a task complete.
+   - Codex must inspect `git status` and `git diff` after worker execution.
+   - Run automated test suites independently before accepting worker changes.

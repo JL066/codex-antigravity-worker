@@ -30,12 +30,12 @@ args = []
 # HTTP_PROXY = "http://127.0.0.1:10808"
 # HTTPS_PROXY = "http://127.0.0.1:10808"
 
-# --- Windows Custom Example ---
+# --- Windows Custom Path Example (Placeholder only — verify actual on-device installation path) ---
 # [mcp_servers.agy]
-# command = "C:\\Users\\<username>\\AppData\\Local\\Programs\\agy-mcp\\agy-mcp.exe"
+# command = "C:\\path\\to\\agy-mcp.exe"
 #
 # [mcp_servers.agy.env]
-# AGY_MCP_AGY_PATH = "C:\\Users\\<username>\\AppData\\Local\\Programs\\Antigravity\\agy.exe"
+# AGY_MCP_AGY_PATH = "C:\\path\\to\\agy.exe"
 # Optional Proxy:
 # HTTP_PROXY = "http://127.0.0.1:10808"
 # HTTPS_PROXY = "http://127.0.0.1:10808"
