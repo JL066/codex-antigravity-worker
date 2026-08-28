@@ -54,7 +54,7 @@ if ((Test-Path $ConfigFile) -and (Select-String -Path $ConfigFile -SimpleMatch "
 } else {
     Write-Host "      'agy' MCP server is NOT yet registered in $ConfigFile." -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "      To register, add the following to $ConfigFile:" -ForegroundColor Gray
+    Write-Host "      To register, add the following to ${ConfigFile}:" -ForegroundColor Gray
     Write-Host "      ------------------------------------------------------" -ForegroundColor DarkGray
     $ExampleConfig = Get-Content (Join-Path $RepoRoot "config\codex-mcp.example.toml") -Raw
     Write-Host $ExampleConfig

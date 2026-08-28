@@ -33,9 +33,12 @@ args = []
 # --- Windows Custom Path Example (Placeholder only — verify actual on-device installation path) ---
 # [mcp_servers.agy]
 # command = "C:\\path\\to\\agy-mcp.exe"
+# args = []
+# If the current Windows session uses these proxy variables, forward their actual values:
+# env_vars = ["HTTP_PROXY", "HTTPS_PROXY", "NO_PROXY"]
 #
 # [mcp_servers.agy.env]
 # AGY_MCP_AGY_PATH = "C:\\path\\to\\agy.exe"
-# Optional Proxy:
+# Optional fixed proxy values (use only when environment forwarding is not suitable):
 # HTTP_PROXY = "http://127.0.0.1:10808"
 # HTTPS_PROXY = "http://127.0.0.1:10808"
