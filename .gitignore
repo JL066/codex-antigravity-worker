@@ -1,0 +1,45 @@
+# Environment and credentials
+.env
+.env.*
+*.pem
+*.key
+*.token
+*credentials*.json
+auth.json
+
+# Local configurations and logs
+config.toml
+!config/codex-mcp.example.toml
+*.log
+logs/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts & runtime caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+node_modules/
+dist/
+build/
+
+# IDE & editor state
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test & fixture runtime outputs
+tmp/
+temp/
+fixture-*/
+.agy-mcp/

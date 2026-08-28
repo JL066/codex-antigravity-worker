@@ -1,0 +1,41 @@
+# Example OpenAI Codex MCP Configuration for Antigravity Worker
+#
+# Target File:
+#   macOS / Linux: ~/.codex/config.toml
+#   Windows:       %USERPROFILE%\.codex\config.toml
+#
+# Prerequisites:
+#   1. Google Antigravity CLI (`agy`) installed and logged in.
+#   2. `agy-mcp` binary installed from https://github.com/tphakala/agy-mcp
+
+[mcp_servers.agy]
+# Standard configuration when agy-mcp is in system PATH:
+command = "agy-mcp"
+args = []
+
+# ==============================================================================
+# Optional Custom Environment Configuration
+# ==============================================================================
+# If `agy` is not in standard PATH or you use specific proxy/network settings,
+# uncomment and adjust the platform-specific environment block below:
+
+# --- macOS / Linux Custom Example ---
+# [mcp_servers.agy]
+# command = "/Users/<username>/.local/bin/agy-mcp"
+#
+# [mcp_servers.agy.env]
+# AGY_MCP_AGY_PATH = "/Users/<username>/.local/bin/agy"
+# PATH = "/Users/<username>/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
+# Optional Proxy (if required to connect to Google APIs):
+# HTTP_PROXY = "http://127.0.0.1:10808"
+# HTTPS_PROXY = "http://127.0.0.1:10808"
+
+# --- Windows Custom Example ---
+# [mcp_servers.agy]
+# command = "C:\\Users\\<username>\\AppData\\Local\\Programs\\agy-mcp\\agy-mcp.exe"
+#
+# [mcp_servers.agy.env]
+# AGY_MCP_AGY_PATH = "C:\\Users\\<username>\\AppData\\Local\\Programs\\Antigravity\\agy.exe"
+# Optional Proxy:
+# HTTP_PROXY = "http://127.0.0.1:10808"
+# HTTPS_PROXY = "http://127.0.0.1:10808"
