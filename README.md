@@ -1,6 +1,6 @@
 # Codex Antigravity Worker
 
-An orchestration and delegation integration layer enabling **OpenAI Codex** to leverage **Google Antigravity CLI (`agy`)** as a high-speed, autonomous sub-agent worker (powered by **Gemini 3.7 Flash**) via the standard Model Context Protocol (MCP).
+Delegation policies, setup, and safety workflow for using **Google Antigravity / Gemini** as coding workers in **OpenAI Codex** via [`agy-mcp`](https://github.com/tphakala/agy-mcp).
 
 ---
 
@@ -11,6 +11,14 @@ An orchestration and delegation integration layer enabling **OpenAI Codex** to l
 > We do not fork, copy, or duplicate underlying MCP server or CLI code. Instead, this project provides the **Codex delegation policies, MCP configuration templates, sub-agent skills, and platform setup automation** necessary to connect:
 >
 > **OpenAI Codex** → [`tphakala/agy-mcp`](https://github.com/tphakala/agy-mcp) (MCP Server) → **Google Antigravity CLI (`agy`)** → **Gemini 3.7 Flash (Worker)**
+
+### Why this layer exists
+
+`agy-mcp` can already be connected directly to Codex. It provides the MCP tool surface and process supervision needed to run Antigravity from an MCP client.
+
+This repository adds the **Codex-specific orchestration layer** on top: when to delegate, which tasks are appropriate for Gemini, how to use sync vs. async jobs and conversation continuation, how to isolate higher-risk work, and how Codex should independently review diffs and tests before accepting worker output.
+
+In short: **`agy-mcp` provides the tool; `codex-antigravity-worker` teaches Codex how to use that tool as a coding worker.**
 
 ---
 
