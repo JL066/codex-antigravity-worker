@@ -1,14 +1,16 @@
-# Codex Antigravity Worker
+# Codex Antigravity Worker Skill
 
-Delegation policies, setup, and safety workflow for using **Google Antigravity / Gemini** as coding workers in **OpenAI Codex** via [`agy-mcp`](https://github.com/tphakala/agy-mcp).
+A **Codex delegation skill** for using **Google Antigravity / Gemini** as a coding worker through [`agy-mcp`](https://github.com/tphakala/agy-mcp), with setup helpers, safety policies, and review workflow for OpenAI Codex.
 
 ---
 
 ## 📌 Project Scope & Positioning
 
-> **Important**: This repository is **not** an Antigravity MCP Server implementation.
+> **This repository is a Codex Skill package, not an Antigravity MCP Server implementation.**
 >
-> We do not fork, copy, or duplicate underlying MCP server or CLI code. Instead, this project provides the **Codex delegation policies, MCP configuration templates, sub-agent skills, and platform setup automation** necessary to connect:
+> The core asset is the [`antigravity-flash-worker`](skills/antigravity-flash-worker/SKILL.md) skill. This repository also ships MCP configuration templates, setup automation, and documentation needed to install and use that skill with Codex.
+>
+> We do not fork, copy, or duplicate the underlying MCP server or CLI code. Instead, this project provides the **Codex delegation policies, MCP configuration templates, sub-agent skill, and platform setup automation** necessary to connect:
 >
 > **OpenAI Codex** → [`tphakala/agy-mcp`](https://github.com/tphakala/agy-mcp) (MCP Server) → **Google Antigravity CLI (`agy`)** → **Gemini 3.7 Flash (Worker)**
 
@@ -16,9 +18,9 @@ Delegation policies, setup, and safety workflow for using **Google Antigravity /
 
 `agy-mcp` can already be connected directly to Codex. It provides the MCP tool surface and process supervision needed to run Antigravity from an MCP client.
 
-This repository adds the **Codex-specific orchestration layer** on top: when to delegate, which tasks are appropriate for Gemini, how to use sync vs. async jobs and conversation continuation, how to isolate higher-risk work, and how Codex should independently review diffs and tests before accepting worker output.
+This repository adds the **Codex-specific skill and orchestration layer** on top: when to delegate, which tasks are appropriate for Gemini, how to use sync vs. async jobs and conversation continuation, how to isolate higher-risk work, and how Codex should independently review diffs and tests before accepting worker output.
 
-In short: **`agy-mcp` provides the tool; `codex-antigravity-worker` teaches Codex how to use that tool as a coding worker.**
+In short: **`agy-mcp` provides the tool; `codex-antigravity-worker-skill` teaches Codex how to use that tool as a coding worker.**
 
 ---
 
