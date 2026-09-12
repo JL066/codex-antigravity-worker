@@ -1,13 +1,13 @@
 ---
 name: antigravity-flash-worker
-description: Delegate scoped code investigation, error triage, codebase reading, test generation, and targeted bug fixes to the Antigravity Gemini 3.7 Flash sub-agent worker via agy-mcp.
+description: Delegate scoped code investigation, error triage, codebase reading, test generation, and targeted bug fixes to the Antigravity Gemini 3.8 Flash sub-agent worker via agy-mcp.
 ---
 
 # Antigravity Flash Worker Delegation Skill
 
 ## Overview
 
-Use this skill when you (the primary orchestrating agent, Codex) want to offload scoped investigations, rapid codebase indexing, test generation, or targeted bug fixes to the **Google Antigravity Gemini 3.7 Flash** worker via the `agy` Model Context Protocol (MCP) server (`tphakala/agy-mcp`).
+Use this skill when you (the primary orchestrating agent, Codex) want to offload scoped investigations, rapid codebase indexing, test generation, or targeted bug fixes to the **Google Antigravity Gemini 3.8 Flash** worker via the `agy` Model Context Protocol (MCP) server (`tphakala/agy-mcp`).
 
 The Antigravity worker operates as a **subordinate specialist worker**. It performs fast, autonomous executions within the designated workspace. **All final architectural judgements, safety reviews, test verifications, and quality decisions remain strictly with the primary agent (Codex).**
 
@@ -43,21 +43,21 @@ Use `agy_run_sync` for quick, interactive tasks (bounded wait, default up to 10 
 
 - `prompt`: Self-contained, explicit task description with clear instructions, acceptance criteria, and constraints.
 - `cwd`: Absolute path to the target repository or workspace.
-- `model`: Target model ID (default recommended: `gemini-3.7-flash-high`).
+- `model`: Target model ID (default recommended: `gemini-3.8-flash-high`).
 - `dirs`: (Optional) Additional directory paths if the task references external dependencies.
 
 ```json
 {
   "prompt": "Inspect calculator.py for the discount calculation bug. Fix the issue and run python3 test_calculator.py to verify.",
   "cwd": "/path/to/target-repo",
-  "model": "gemini-3.7-flash-high"
+  "model": "gemini-3.8-flash-high"
 }
 ```
 
 ### 2. Asynchronous / Long-Running Tasks (`agy_run` + `agy_wait`)
 Use `agy_run` when kicking off long tasks or running multiple tasks concurrently:
 
-1. Call `agy_run` with `prompt`, `cwd`, and `model`. It immediately returns a `job_id` and initial state (`running`).
+1. Call `agy_run` with `prompt`, `cwd`, and `model`; prefer `gemini-3.8-flash-high` unless a different available tier is needed. It immediately returns a `job_id` and initial state (`running`).
 2. Call `agy_status` for non-blocking progress snapshots.
 3. Call `agy_wait` with `job_id` to block until the job completes and receive the final result.
 4. If a running job needs to be aborted, call `agy_cancel` with `job_id` to cleanly terminate the process tree.
