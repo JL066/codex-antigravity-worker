@@ -12,7 +12,7 @@ A **Codex delegation skill** for using **Google Antigravity / Gemini** as a codi
 >
 > We do not fork, copy, or duplicate the underlying MCP server or CLI code. Instead, this project provides the **Codex delegation policies, MCP configuration templates, sub-agent skill, and platform setup automation** necessary to connect:
 >
-> **OpenAI Codex** → [`tphakala/agy-mcp`](https://github.com/tphakala/agy-mcp) (MCP Server) → **Google Antigravity CLI (`agy`)** → **Gemini 3.7 Flash (Worker)**
+> **OpenAI Codex** → [`tphakala/agy-mcp`](https://github.com/tphakala/agy-mcp) (MCP Server) → **Google Antigravity CLI (`agy`)** → **Gemini 3.8 Flash (Worker)**
 
 ### Why this layer exists
 
@@ -50,7 +50,7 @@ In short: **`agy-mcp` provides the tool; `codex-antigravity-worker-skill` teache
                                │ Google Cloud / Antigravity API
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│            Autonomous Worker: Gemini 3.7 Flash              │
+│            Autonomous Worker: Gemini 3.8 Flash              │
 │       (Fast Code Exploration, Analysis, Scoped Edits)       │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -134,6 +134,8 @@ A full annotated template is available in [`config/codex-mcp.example.toml`](conf
 
 This repository installs the [`antigravity-flash-worker`](skills/antigravity-flash-worker/SKILL.md) skill into Codex (`~/.codex/skills/antigravity-flash-worker/`).
 
+The skill explicitly selects `gemini-3.8-flash-medium`; GPT handoff follows the caller’s `AGENTS.md` model policy.
+
 ### When Codex Delegates
 - **Fast Codebase Discovery**: Mapping entrypoints, build files, and module structures.
 - **Symbol / Reference Lookup**: Tracing functions and types across multi-file codebases.
@@ -144,7 +146,7 @@ This repository installs the [`antigravity-flash-worker`](skills/antigravity-fla
 - **Unattended Execution**: `agy-mcp` launches `agy` with `--dangerously-skip-permissions` for autonomous execution. Note that `cwd` specifies the intended working directory, **not** an OS security sandbox.
 - **Caller-Side Safeguards**: Always pass explicit project paths; avoid delegating with root (`/`) or home (`~`) directories.
 - **High-Risk Worktree Pattern**: For broad or speculative changes, Codex can create an isolated Git worktree (`git worktree add ../temp-worktree`) and delegate execution there before merging.
-- **Primary Agent Authority**: Codex reviews diffs, runs test suites independently, and makes all architectural decisions.
+- **Primary Agent Authority**: Codex reviews diffs, runs targeted checks independently, and makes all architectural decisions.
 
 ---
 

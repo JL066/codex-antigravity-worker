@@ -28,7 +28,7 @@
                                │ Google Cloud / Antigravity API
                                ▼
 ┌─────────────────────────────────────────────────────────────┐
-│            Autonomous Worker: Gemini 3.7 Flash              │
+│            Autonomous Worker: Gemini 3.8 Flash              │
 │       (Fast Code Exploration, Analysis, Scoped Edits)       │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -39,7 +39,7 @@
 
 ### 1. Clear Division of Responsibility
 - **OpenAI Codex (Primary Agent)**: Owns system-level context, task breakdown, architectural governance, multi-step planning, final diff validation, and user interaction.
-- **Antigravity Gemini 3.7 Flash (Subordinate Worker)**: Operates as a fast, autonomous execution sub-agent for self-contained, mechanical, or scoped tasks (e.g., codebase indexing, symbol tracing, error triage, localized bug fixing).
+- **Antigravity Gemini 3.8 Flash (Subordinate Worker)**: Operates as a fast, autonomous execution sub-agent for self-contained, mechanical, or scoped tasks (e.g., codebase indexing, symbol tracing, error triage, localized bug fixing).
 
 ### 2. Standard MCP Protocol
 - Communication strictly follows standard Model Context Protocol (JSON-RPC over stdio).
@@ -86,4 +86,4 @@ To enable autonomous sub-agent execution without interactive approval prompts, `
 
 3. **Mandatory Primary Agent Verification**:
    - Codex must inspect `git status` and `git diff` after worker execution.
-   - Run automated test suites independently before accepting worker changes.
+   - Run the smallest relevant independent checks under the caller’s Testing rules before accepting worker changes.

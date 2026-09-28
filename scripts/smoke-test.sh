@@ -74,7 +74,7 @@ if [[ -n "${CODEX_BIN}" ]]; then
 
     echo "Running end-to-end task through Codex..."
     "${CODEX_BIN}" exec "${EXTRA_FLAGS[@]}" -C "${TMP_DIR}" \
-        "请调用 agy MCP 工具中的 agy_run_sync，指定 model 为 gemini-3.7-flash-high，在当前目录修复 calculator.py 的折扣计算 bug 并运行现有测试验证。" </dev/null || {
+        "请调用 agy MCP 工具中的 agy_run_sync，指定 model 为 gemini-3.8-flash-medium，在当前目录修复 calculator.py 的折扣计算 bug 并运行现有测试验证。" </dev/null || {
             echo ""
             echo "Smoke test execution finished with non-zero exit code."
             if [[ "${CODEX_UNSAFE_SMOKE:-0}" != "1" ]]; then
